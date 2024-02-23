@@ -5,7 +5,11 @@ function Main() {
   return (
     <main className="main">
       {/* <div></div> Это будет фильтр*/}
-      <ul className='card-list'>
+      <ul className='main__card-list'>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
         <Card/>
         <Card/>
         <Card/>
