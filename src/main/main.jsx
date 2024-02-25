@@ -1,7 +1,9 @@
 import Card from '../card/card';
 import './main.css';
 
+
 function Main() {
+
   return (
     <main className="main">
       {/* <div></div> Это будет фильтр*/}
