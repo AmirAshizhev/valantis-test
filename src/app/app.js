@@ -9,7 +9,7 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getCardsIds()
+    api.getInitialCardsIds()
       .then((data) => {
         console.log(data)
         setCardsIdsArray(data.result)
@@ -29,8 +29,6 @@ function App() {
         console.log(err)
       })
   }, [cardsIdsArray])
-
-  console.log(cards)
 
   return (
     <div className="App">

@@ -7,7 +7,7 @@ class Api {
   }
 
 
-  getCardsIds(){
+  getInitialCardsIds(){
     return fetch(`${this._url}`, {
       method: 'POST',
       headers: {
@@ -15,7 +15,35 @@ class Api {
       },
       body: JSON.stringify({
         "action": "get_ids",
-        "params": {"offset": 0, "limit": 50}
+        "params": {"offset": 0, "limit": 30}
+      }),
+    })
+    .then(this._checkResponse)
+  }
+
+  getNextPageCardsIds(){
+    return fetch(`${this._url}`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+      },
+      body: JSON.stringify({
+        "action": "get_ids",
+        "params": {"offset": 0, "limit": 30}
+      }),
+    })
+    .then(this._checkResponse)
+  }
+
+  getPrevPageCardsIds(){
+    return fetch(`${this._url}`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+      },
+      body: JSON.stringify({
+        "action": "get_ids",
+        "params": {"offset": 0, "limit": 30}
       }),
     })
     .then(this._checkResponse)
