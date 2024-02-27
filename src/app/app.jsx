@@ -17,23 +17,41 @@ function App() {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, []) //TODO посмотреть, иногда возвращается пустой массив карточек
 
   useEffect(() => {
+    if (cardsIdsArray.length === 0){
+      return
+    }
+
     api.getCardsByIds(cardsIdsArray)
       .then((data) => {
         console.log(data)
-        setCards(data.result)
+        setCards(filterArrayMakingUniqueId(data.result))
       })
       .catch((err) => {
         console.log(err)
       })
   }, [cardsIdsArray])
 
+  function filterArrayMakingUniqueId(arr){
+    return arr.reduce(
+      (acc, arrItem) => {
+        const existingObj = acc.find(item => item.id === arrItem.id);
+        if (!existingObj) {
+            return [...acc, arrItem];
+        }
+        return acc;
+      }, [])
+  }
+
+
+  console.log(cards.length)
   return (
     <div className="App">
       <Main
         cards={cards}
+        setCardsIdsArray={setCardsIdsArray}
       />
     </div>
   );

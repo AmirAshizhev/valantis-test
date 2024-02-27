@@ -15,13 +15,13 @@ class Api {
       },
       body: JSON.stringify({
         "action": "get_ids",
-        "params": {"offset": 0, "limit": 30}
+        "params": {"offset": 0, "limit": 50}
       }),
     })
     .then(this._checkResponse)
   }
 
-  getNextPageCardsIds(){
+  getPageCardsIdsByPageNumber(pageNumber){
     return fetch(`${this._url}`, {
       method: 'POST',
       headers: {
@@ -29,21 +29,7 @@ class Api {
       },
       body: JSON.stringify({
         "action": "get_ids",
-        "params": {"offset": 0, "limit": 30}
-      }),
-    })
-    .then(this._checkResponse)
-  }
-
-  getPrevPageCardsIds(){
-    return fetch(`${this._url}`, {
-      method: 'POST',
-      headers: {
-        ...this._headers,
-      },
-      body: JSON.stringify({
-        "action": "get_ids",
-        "params": {"offset": 0, "limit": 30}
+        "params": {"offset": pageNumber, "limit": 50}
       }),
     })
     .then(this._checkResponse)
