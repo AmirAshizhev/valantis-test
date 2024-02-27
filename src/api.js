@@ -29,7 +29,7 @@ class Api {
       },
       body: JSON.stringify({
         "action": "get_ids",
-        "params": {"offset": pageNumber, "limit": 50}
+        "params": {"offset": pageNumber*50, "limit": 50}
       }),
     })
     .then(this._checkResponse)

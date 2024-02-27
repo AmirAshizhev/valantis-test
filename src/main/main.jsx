@@ -5,7 +5,7 @@ import PageBtn from '../page-btn/page-btn';
 import './main.css';
 
 
-function Main({cards, setCardsIdsArray}) {
+function Main({cards, setCardsIdsArray, setCards, loading, setLoading}) {
 
   const [pageCount, setPageCount] = useState(1)
 
@@ -17,6 +17,8 @@ function Main({cards, setCardsIdsArray}) {
   ))
 
   function getNextPage() {
+    setLoading(true)
+    setCards([])
     setPageCount(pageCount + 1)
 
     api.getPageCardsIdsByPageNumber(pageCount)
@@ -31,6 +33,8 @@ function Main({cards, setCardsIdsArray}) {
   }
 
   function getPrevPage() {
+    setLoading(true)
+    setCards([])
     if(pageCount === 1) {
       return
     }
@@ -51,9 +55,15 @@ function Main({cards, setCardsIdsArray}) {
   return (
     <main className="main">
       {/* <div></div> Это будет фильтр*/}
+      {loading ? 
+      <div>
+        Грузим карточки. Терпение.
+      </div>
+      :
       <ul className='main__card-list'>
         {cardList}
       </ul>
+      }
       <div className='main__btns'>
         <PageBtn
           text={"< Предыдущая"}

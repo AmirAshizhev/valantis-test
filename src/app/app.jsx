@@ -7,8 +7,10 @@ function App() {
 
   const [cardsIdsArray, setCardsIdsArray] = useState([]);
   const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     api.getInitialCardsIds()
       .then((data) => {
         console.log(data)
@@ -28,6 +30,7 @@ function App() {
       .then((data) => {
         console.log(data)
         setCards(filterArrayMakingUniqueId(data.result))
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -51,7 +54,10 @@ function App() {
     <div className="App">
       <Main
         cards={cards}
+        setCards={setCards}
         setCardsIdsArray={setCardsIdsArray}
+        loading={loading}
+        setLoading={setLoading}
       />
     </div>
   );
